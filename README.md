@@ -225,9 +225,11 @@ pip install -r requirements.txt
 
 **Prince Tiwari**
 **Prince Yadav**
+**Chandan Patel**
 
 GitHub: https://github.com/Prince8879
 GitHub: https://github.com/princeyadaav
+GitHub: https://github.com/ChandanPatel04
 
 
 ---
