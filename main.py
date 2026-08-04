@@ -60,7 +60,7 @@ class PredictionResponce(BaseModel):
     predicted_mental_health_score:float
 @app.get("/")
 def greet():
-    return {"Welcome prince"}
+    return {"kuchh nahi dikhega frontend kholo"}
 
     
 @app.post("/predict")
