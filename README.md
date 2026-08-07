@@ -226,10 +226,12 @@ pip install -r requirements.txt
 **Prince Tiwari**
 **Prince Yadav**
 **Chandan Patel**
+**Rehan Ahmed**
 
 GitHub: https://github.com/Prince8879
 GitHub: https://github.com/princeyadaav
 GitHub: https://github.com/ChandanPatel04
+GitHub: https://github.com/rehancccml-lab
 
 
 ---
