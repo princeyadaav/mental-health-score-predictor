@@ -567,9 +567,34 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   height: 1px;
   flex: 1;
   background: var(--line);
-  .progress-step.active + .progress-line {
+}
+
+.progress-step.active + .progress-line {
   background: var(--pine);
 }
+/* Completed progress step */
+
+.progress-step.completed {
+  color: var(--pine);
+}
+
+.progress-step.completed span {
+  background: var(--pine);
+  border-color: var(--pine);
+  color: transparent;
+  position: relative;
+}
+
+.progress-step.completed span::after {
+  content: "✓";
+  position: absolute;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.progress-step.completed + .progress-line {
+  background: var(--pine);
 }
 
 /* =========================================================

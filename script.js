@@ -55,7 +55,10 @@ const formSections = form.querySelectorAll("fieldset.group");
 
 function updateProgress(stepNumber) {
   progressSteps.forEach((step, index) => {
-    step.classList.toggle("active", index === stepNumber - 1);
+    const currentStep = index + 1;
+
+    step.classList.toggle("active", currentStep === stepNumber);
+    step.classList.toggle("completed", currentStep < stepNumber);
   });
 }
 
@@ -221,6 +224,11 @@ formSections.forEach((section, index) => {
     });
 
     showState("result");
+    
+    progressSteps.forEach((step) => {
+     step.classList.remove("active");
+     step.classList.add("completed");
+});
   }
 
   function renderError(label, copy) {
