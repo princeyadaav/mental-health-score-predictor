@@ -26,8 +26,28 @@
   <!-- FORM PANEL -->
   <section class="panel form-panel" aria-labelledby="form-heading">
     <form id="predict-form" novalidate>
+      <div class="form-progress">
+    <div class="progress-step active" data-step="1">
+        <span>01</span>
+        <p>Profile</p>
+    </div>
 
-      <fieldset class="group">
+    <div class="progress-line"></div>
+
+    <div class="progress-step" data-step="2">
+        <span>02</span>
+        <p>Academic & Habits</p>
+    </div>
+
+    <div class="progress-line"></div>
+
+    <div class="progress-step" data-step="3">
+        <span>03</span>
+        <p>Lifestyle & Stress</p>
+    </div>
+</div>
+
+      <fieldset class="group form-step" data-step="1">
         <legend><span class="legend-index">01</span> Profile</legend>
         <div class="grid grid-3">
           <div class="field">
@@ -65,7 +85,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="group">
+      <fieldset class="group form-step" data-step="2">
         <legend><span class="legend-index">02</span> Academic &amp; Digital Habits</legend>
         <div class="grid grid-2">
           <div class="field">
@@ -124,7 +144,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="group">
+      <fieldset class="group form-step" data-step="3">
         <legend><span class="legend-index">03</span> Lifestyle &amp; Stress</legend>
         <div class="grid grid-3">
           <div class="field">

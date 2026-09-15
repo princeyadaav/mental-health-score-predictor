@@ -513,6 +513,64 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   text-align: center;
   margin: 0;
 }
+/* =========================================================
+   FORM PROGRESS
+   ========================================================= */
+
+.form-progress {
+  display: flex;
+  align-items: center;
+  padding: 24px 0 8px;
+  gap: 10px;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #90A096;
+  white-space: nowrap;
+}
+
+.progress-step span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.progress-step p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.progress-step.active {
+  color: var(--pine);
+}
+
+.progress-step.active span {
+  background: var(--pine);
+  border-color: var(--pine);
+  color: #fff;
+}
+
+.progress-line {
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+  .progress-step.active + .progress-line {
+  background: var(--pine);
+}
+}
 
 /* =========================================================
    RESPONSIVE
@@ -524,6 +582,23 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 }
 
 @media (max-width: 560px) {
+  .form-progress {
+  gap: 6px;
+}
+
+.progress-step {
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.progress-step p {
+  font-size: 10px;
+}
+
+.progress-line {
+  margin-bottom: 18px;
+}
   .site-header { padding: 44px 16px 24px; }
   .layout { padding: 0 16px 32px; gap: 16px; }
   .form-panel { padding: 4px 20px 24px; }

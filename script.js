@@ -46,6 +46,29 @@
   }
   drawTicks();
 
+// ---------------------------------------------------------
+// Form progress indicator
+// ---------------------------------------------------------
+
+const progressSteps = document.querySelectorAll(".progress-step");
+const formSections = form.querySelectorAll("fieldset.group");
+
+function updateProgress(stepNumber) {
+  progressSteps.forEach((step, index) => {
+    step.classList.toggle("active", index === stepNumber - 1);
+  });
+}
+
+formSections.forEach((section, index) => {
+  section.addEventListener("focusin", () => {
+    updateProgress(index + 1);
+  });
+
+  section.addEventListener("click", () => {
+    updateProgress(index + 1);
+  });
+});
+
   // ---------------------------------------------------------
   // Segmented control (stress_level) wiring
   // ---------------------------------------------------------
