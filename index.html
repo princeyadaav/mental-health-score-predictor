@@ -245,6 +245,17 @@
           <span class="confidence-pill" id="confidence-score">Confidence 0%</span>
         </div>
         <ul class="score-reasons" id="score-reasons"></ul>
+        <div class="result-actions" aria-label="Result actions">
+          <button type="button" class="result-action-btn" id="download-result-btn" aria-label="Download your mental health signal result">
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" /></svg>
+            <span>Download Result</span>
+          </button>
+          <button type="button" class="result-action-btn" id="share-result-btn" aria-label="Share your mental health signal result">
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><circle cx="18" cy="5" r="2.5" /><circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="19" r="2.5" /><path d="m8.2 10.8 7.6-4.5m-7.6 4.9 7.6 4.5" /></svg>
+            <span>Share Result</span>
+          </button>
+        </div>
+        <p class="result-action-status" id="result-action-status" role="status" aria-live="polite"></p>
         <button type="button" class="reset-btn" id="reset-btn">Run another read</button>
         <a class="result-guide-link" id="result-guide-link" href="lifestyle.html">Open lifestyle methods <span aria-hidden="true">→</span></a>
       </div>

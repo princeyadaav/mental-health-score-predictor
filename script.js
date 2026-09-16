@@ -22,6 +22,9 @@
   const errorCopyEl = document.getElementById("error-copy");
   const resultGuideLink = document.getElementById("result-guide-link");
   const themeToggle = document.getElementById("theme-toggle");
+  const downloadResultBtn = document.getElementById("download-result-btn");
+  const shareResultBtn = document.getElementById("share-result-btn");
+  const resultActionStatus = document.getElementById("result-action-status");
 
   const GAUGE_ARC_LENGTH = 314; // approx pi * r(100)
 
@@ -269,6 +272,138 @@ formSections.forEach((section, index) => {
     showState("error");
   }
 
+  function getResultText() {
+    const score = scoreNumberEl.textContent.trim();
+    const band = scoreBandEl.textContent.trim();
+    const context = scoreContextEl.textContent.trim();
+    if (!score || !band || band === "—") return null;
+    return { score, band, context };
+  }
+
+  function setResultActionStatus(message) {
+    resultActionStatus.textContent = message;
+    window.setTimeout(() => {
+      if (resultActionStatus.textContent === message) resultActionStatus.textContent = "";
+    }, 4000);
+  }
+
+  function wrapCanvasText(context, text, maxWidth) {
+    const words = text.split(/\s+/);
+    const lines = [];
+    let line = "";
+    words.forEach((word) => {
+      const next = line ? `${line} ${word}` : word;
+      if (context.measureText(next).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = next;
+      }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function downloadResult() {
+    const result = getResultText();
+    if (!result) {
+      setResultActionStatus("Complete a prediction before downloading.");
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 1200;
+    canvas.height = 760;
+    const context = canvas.getContext("2d");
+    const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#174E58");
+    gradient.addColorStop(0.58, "#237C72");
+    gradient.addColorStop(1, "#356B89");
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "rgba(242,184,75,0.2)";
+    context.beginPath();
+    context.arc(1080, 80, 220, 0, Math.PI * 2);
+    context.fill();
+
+    context.fillStyle = "#EAF3EE";
+    context.font = "600 28px Inter, sans-serif";
+    context.fillText("Student Social Media & Mental Health", 74, 86);
+    context.fillStyle = "rgba(234,243,238,0.7)";
+    context.font = "500 18px Inter, sans-serif";
+    context.fillText("MENTAL HEALTH SIGNAL / RESULT", 76, 145);
+    context.fillStyle = "#FFFFFF";
+    context.font = "700 112px 'JetBrains Mono', monospace";
+    context.fillText(result.score, 72, 290);
+    context.fillStyle = "rgba(234,243,238,0.65)";
+    context.font = "500 28px Inter, sans-serif";
+    context.fillText("/10", 330, 288);
+    context.fillStyle = "#FFF8E8";
+    context.font = "italic 600 36px Fraunces, Georgia, serif";
+    context.fillText(result.band, 76, 366);
+    context.fillStyle = "rgba(234,243,238,0.82)";
+    context.font = "400 22px Inter, sans-serif";
+    wrapCanvasText(context, result.context, 1040).slice(0, 3).forEach((line, index) => {
+      context.fillText(line, 76, 420 + index * 34);
+    });
+    context.strokeStyle = "rgba(234,243,238,0.28)";
+    context.lineWidth = 2;
+    context.beginPath();
+    context.moveTo(76, 570);
+    context.lineTo(1124, 570);
+    context.stroke();
+    context.fillStyle = "rgba(234,243,238,0.72)";
+    context.font = "400 18px Inter, sans-serif";
+    context.fillText("For informational purposes only — not a clinical assessment.", 76, 630);
+    context.fillStyle = "rgba(234,243,238,0.5)";
+    context.font = "500 16px 'JetBrains Mono', monospace";
+    context.fillText("MENTAL HEALTH SIGNAL", 76, 690);
+
+    const link = document.createElement("a");
+    link.download = "mental-health-signal-result.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+    setResultActionStatus("Result card downloaded.");
+  }
+
+  async function copyResultText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.setAttribute("readonly", "");
+    textArea.style.position = "fixed";
+    textArea.style.opacity = "0";
+    document.body.appendChild(textArea);
+    textArea.select();
+    const copied = document.execCommand("copy");
+    textArea.remove();
+    if (!copied) throw new Error("Clipboard access is unavailable.");
+  }
+
+  async function shareResult() {
+    const result = getResultText();
+    if (!result) {
+      setResultActionStatus("Complete a prediction before sharing.");
+      return;
+    }
+    const shareText = `Student Social Media & Mental Health\nMental Health Signal: ${result.score}/10\nResult: ${result.band}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Mental Health Signal Result", text: shareText });
+        setResultActionStatus("Result shared.");
+      } else {
+        await copyResultText(shareText);
+        setResultActionStatus("Result copied to clipboard.");
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") setResultActionStatus("Could not share the result. Please try again.");
+    }
+  }
+
   // ---------------------------------------------------------
   // Parse FastAPI / Pydantic 422 error responses into
   // field-level messages where possible
@@ -360,5 +495,8 @@ formSections.forEach((section, index) => {
   resetBtn.addEventListener("click", () => {
     showState("idle");
   });
+
+  downloadResultBtn.addEventListener("click", downloadResult);
+  shareResultBtn.addEventListener("click", shareResult);
 
 })();
