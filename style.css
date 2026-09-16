@@ -305,6 +305,93 @@ label {
   color: var(--ink-soft);
 }
 
+/* =========================================================
+   INFO TOOLTIPS
+   ========================================================= */
+.label-with-info {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 6px;
+  z-index: 1;
+}
+
+.info-tooltip-trigger {
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  border: 1px solid var(--pine);
+  border-radius: 50%;
+  background: var(--pine-tint);
+  color: var(--pine-deep);
+  font: 700 11px/15px var(--font-mono);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.info-tooltip-trigger:hover,
+.info-tooltip-trigger.is-open {
+  background: var(--pine);
+  border-color: var(--pine);
+  color: #fff;
+}
+
+.info-tooltip-trigger:focus-visible {
+  outline: 3px solid var(--pine-tint);
+  outline-offset: 2px;
+}
+
+.info-tooltip {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 9px);
+  z-index: 20;
+  width: min(270px, calc(100vw - 48px));
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+}
+
+.info-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  bottom: -6px;
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  transform: rotate(45deg);
+}
+
+.info-tooltip-trigger:hover + .info-tooltip,
+.info-tooltip-trigger:focus-visible + .info-tooltip,
+.info-tooltip-trigger.is-open + .info-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.field:has(.info-tooltip-trigger:hover),
+.field:has(.info-tooltip-trigger:focus-visible),
+.field:has(.info-tooltip-trigger.is-open) {
+  z-index: 5;
+}
+
 input[type="text"],
 input[type="number"],
 select {
@@ -847,6 +934,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   .api-note { text-align: center; }
   .result-actions { flex-direction: column; align-items: stretch; }
   .result-action-btn { width: 100%; }
+  .info-tooltip { width: min(260px, calc(100vw - 40px)); }
 }
 
 

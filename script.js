@@ -25,6 +25,7 @@
   const downloadResultBtn = document.getElementById("download-result-btn");
   const shareResultBtn = document.getElementById("share-result-btn");
   const resultActionStatus = document.getElementById("result-action-status");
+  const tooltipTriggers = document.querySelectorAll(".info-tooltip-trigger");
 
   const GAUGE_ARC_LENGTH = 314; // approx pi * r(100)
 
@@ -44,6 +45,40 @@
     const isDark = !document.body.classList.contains("dark-mode");
     setTheme(isDark);
     localStorage.setItem("mental-health-theme", isDark ? "dark" : "light");
+  });
+
+  // ---------------------------------------------------------
+  // Accessible info tooltips
+  // ---------------------------------------------------------
+  function closeTooltips(except = null) {
+    tooltipTriggers.forEach((trigger) => {
+      if (trigger !== except) {
+        trigger.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  tooltipTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const shouldOpen = !trigger.classList.contains("is-open");
+      closeTooltips(trigger);
+      trigger.classList.toggle("is-open", shouldOpen);
+      trigger.setAttribute("aria-expanded", String(shouldOpen));
+    });
+
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeTooltips();
+        trigger.blur();
+      }
+    });
+  });
+
+  document.addEventListener("click", () => closeTooltips());
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeTooltips();
   });
 
   // ---------------------------------------------------------

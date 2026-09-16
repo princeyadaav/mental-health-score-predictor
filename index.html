@@ -96,7 +96,11 @@
         <legend><span class="legend-index">02</span> Academic &amp; Digital Habits</legend>
         <div class="grid grid-2">
           <div class="field">
-            <label for="academic_level">Academic level</label>
+            <div class="label-with-info">
+              <label for="academic_level">Academic level</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about academic level" aria-expanded="false" aria-controls="tooltip-academic-level" aria-describedby="tooltip-academic-level">i</button>
+              <span class="info-tooltip" id="tooltip-academic-level" role="tooltip">Your current level of education helps provide context for your daily routine.</span>
+            </div>
             <select id="academic_level" name="academic_level" required>
               <option value="" disabled selected hidden>Select</option>
               <option value="High School">High School</option>
@@ -106,7 +110,11 @@
             <span class="error-msg" data-for="academic_level"></span>
           </div>
           <div class="field">
-            <label for="most_used_platform">Most-used platform</label>
+            <div class="label-with-info">
+              <label for="most_used_platform">Most-used platform</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about most-used platform" aria-expanded="false" aria-controls="tooltip-most-used-platform" aria-describedby="tooltip-most-used-platform">i</button>
+              <span class="info-tooltip" id="tooltip-most-used-platform" role="tooltip">This helps understand which social media platform is part of your daily digital habits.</span>
+            </div>
             <select id="most_used_platform" name="most_used_platform" required>
               <option value="" disabled selected hidden>Select</option>
               <option value="Facebook">Facebook</option>
@@ -136,7 +144,11 @@
             <span class="error-msg" data-for="purpose_of_use"></span>
           </div>
           <div class="field">
-            <label for="avg_daily_usage_hours">Avg. daily screen time</label>
+            <div class="label-with-info">
+              <label for="avg_daily_usage_hours">Avg. daily screen time</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about average daily screen time" aria-expanded="false" aria-controls="tooltip-daily-screen-time" aria-describedby="tooltip-daily-screen-time">i</button>
+              <span class="info-tooltip" id="tooltip-daily-screen-time" role="tooltip">Helps understand your overall daily digital usage.</span>
+            </div>
             <div class="unit-input">
               <input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
@@ -144,7 +156,11 @@
             <span class="error-msg" data-for="avg_daily_usage_hours"></span>
           </div>
           <div class="field">
-            <label for="daily_unlocks">Daily phone unlocks</label>
+            <div class="label-with-info">
+              <label for="daily_unlocks">Daily phone unlocks</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about daily phone unlocks" aria-expanded="false" aria-controls="tooltip-daily-unlocks" aria-describedby="tooltip-daily-unlocks">i</button>
+              <span class="info-tooltip" id="tooltip-daily-unlocks" role="tooltip">Shows how frequently you interact with your phone throughout the day.</span>
+            </div>
             <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" step="1" required placeholder="e.g. 60" />
             <span class="error-msg" data-for="daily_unlocks"></span>
           </div>
@@ -155,7 +171,11 @@
         <legend><span class="legend-index">03</span> Lifestyle &amp; Stress</legend>
         <div class="grid grid-3">
           <div class="field">
-            <label for="study_hours">Study hours / day</label>
+            <div class="label-with-info">
+              <label for="study_hours">Study hours / day</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about study hours per day" aria-expanded="false" aria-controls="tooltip-study-hours" aria-describedby="tooltip-study-hours">i</button>
+              <span class="info-tooltip" id="tooltip-study-hours" role="tooltip">Helps provide context about your daily study routine.</span>
+            </div>
             <div class="unit-input">
               <input type="number" id="study_hours" name="study_hours" min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
@@ -163,7 +183,11 @@
             <span class="error-msg" data-for="study_hours"></span>
           </div>
           <div class="field">
-            <label for="physical_activity_hours">Physical activity / day</label>
+            <div class="label-with-info">
+              <label for="physical_activity_hours">Physical activity / day</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about physical activity per day" aria-expanded="false" aria-controls="tooltip-physical-activity" aria-describedby="tooltip-physical-activity">i</button>
+              <span class="info-tooltip" id="tooltip-physical-activity" role="tooltip">Helps understand your daily physical activity pattern.</span>
+            </div>
             <div class="unit-input">
               <input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="4.1" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
@@ -171,7 +195,11 @@
             <span class="error-msg" data-for="physical_activity_hours"></span>
           </div>
           <div class="field">
-            <label for="sleep_hours_per_night">Sleep / night</label>
+            <div class="label-with-info">
+              <label for="sleep_hours_per_night">Sleep / night</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about sleep per night" aria-expanded="false" aria-controls="tooltip-sleep" aria-describedby="tooltip-sleep">i</button>
+              <span class="info-tooltip" id="tooltip-sleep" role="tooltip">Sleep duration provides context about your daily rest routine.</span>
+            </div>
             <div class="unit-input">
               <input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" required placeholder="0.0" />
               <span class="unit">hrs</span>
@@ -179,7 +207,11 @@
             <span class="error-msg" data-for="sleep_hours_per_night"></span>
           </div>
           <div class="field field-span">
-            <label for="stress_level">Perceived stress level</label>
+            <div class="label-with-info">
+              <label for="stress_level">Perceived stress level</label>
+              <button class="info-tooltip-trigger" type="button" aria-label="More information about perceived stress level" aria-expanded="false" aria-controls="tooltip-stress-level" aria-describedby="tooltip-stress-level">i</button>
+              <span class="info-tooltip" id="tooltip-stress-level" role="tooltip">This captures how much stress you currently feel in your daily life.</span>
+            </div>
             <div class="segmented" id="stress_level_group" data-name="stress_level">
               <button type="button" class="seg-btn" data-value="Low">Low</button>
               <button type="button" class="seg-btn" data-value="Medium">Medium</button>
