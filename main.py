@@ -148,7 +148,7 @@ def score_risk(data: StudentData, model_score: float) -> tuple[int, str, list[st
     model_risk = np.clip((7.5 - model_score) / 3.9 * 100, 0, 100)
     combined_risk = int(round(np.clip(risk * 0.7 + model_risk * 0.3, 0, 100)))
 
-    if severe_trigger or combined_risk >= 60:
+    if severe_trigger or combined_risk >= 40:
         condition = 'Danger Zone'
         recommendation = 'Your inputs indicate a high-risk pattern. Consider improving sleep, reducing stress, and seeking support from someone you trust.'
     elif combined_risk >= 30:
