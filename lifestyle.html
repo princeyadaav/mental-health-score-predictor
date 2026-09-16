@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lifestyle Methods — Mental Health Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="lifestyle-page">
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <header class="lifestyle-header">
+    <a class="lifestyle-back" href="index.html"><span aria-hidden="true">←</span> Back to signal</a>
+    <p class="lifestyle-kicker">Daily rhythm / practical methods</p>
+    <h1>Build a healthier <em>baseline</em>.</h1>
+    <p class="lifestyle-intro">Small, repeatable choices can move your sleep, stress, movement, and screen habits in a steadier direction.</p>
+    <div class="zone-status" id="zone-status" aria-live="polite">Showing methods for every zone</div>
+  </header>
+
+  <main class="lifestyle-main">
+    <section class="zone-card zone-balanced" data-zone="Balanced/Healthy">
+      <div class="zone-heading">
+        <span class="zone-index">01</span>
+        <div>
+          <p class="zone-label">Balanced / Healthy</p>
+          <h2>Protect what is working.</h2>
+        </div>
+      </div>
+      <p class="zone-summary">Your current rhythm looks supported. Keep the basics reliable before adding more pressure.</p>
+      <ul class="method-list">
+        <li><strong>Keep a sleep anchor.</strong> Wake up within the same one-hour window most days.</li>
+        <li><strong>Bank small movement.</strong> Take a walk, stretch, or train for 20–30 minutes.</li>
+        <li><strong>Make space offline.</strong> Keep one meal or the final 30 minutes before bed screen-free.</li>
+        <li><strong>Schedule recovery.</strong> Treat pauses and time with people as part of your routine.</li>
+      </ul>
+    </section>
+
+    <section class="zone-card zone-warning" data-zone="Warning Zone">
+      <div class="zone-heading">
+        <span class="zone-index">02</span>
+        <div>
+          <p class="zone-label">Warning Zone</p>
+          <h2>Lower the daily load.</h2>
+        </div>
+      </div>
+      <p class="zone-summary">A few elevated habits may be draining your margin. Choose one adjustment you can repeat this week.</p>
+      <ul class="method-list">
+        <li><strong>Move bedtime earlier.</strong> Shift it by 15–30 minutes instead of chasing a perfect reset.</li>
+        <li><strong>Use friction for scrolling.</strong> Turn off non-essential alerts and keep social apps off your home screen.</li>
+        <li><strong>Work in contained blocks.</strong> Try 45 minutes focused, then 10 minutes away from the screen.</li>
+        <li><strong>Do a two-minute check-in.</strong> Name the stressor, the next small action, and one person you can contact.</li>
+      </ul>
+    </section>
+
+    <section class="zone-card zone-danger" data-zone="Danger Zone">
+      <div class="zone-heading">
+        <span class="zone-index">03</span>
+        <div>
+          <p class="zone-label">Danger Zone</p>
+          <h2>Stabilize and seek support.</h2>
+        </div>
+      </div>
+      <p class="zone-summary">Your inputs suggest a high-strain pattern. Reduce demands where possible and bring another person into the plan.</p>
+      <ul class="method-list">
+        <li><strong>Start with the next hour.</strong> Drink water, eat something simple, and step away from the feed.</li>
+        <li><strong>Protect tonight.</strong> Set a low-stimulation wind-down and ask someone to help you hold the boundary.</li>
+        <li><strong>Say it plainly.</strong> Tell a trusted person, “I’m having a hard week and could use support.”</li>
+        <li><strong>Reach for professional care.</strong> A counselor, doctor, or local crisis service can help you decide what comes next.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="lifestyle-footer">Informational guidance only. A score is not a diagnosis.</footer>
+
+  <script>
+    const zoneLabels = {
+      "Balanced/Healthy": "Balanced / Healthy",
+      "Warning Zone": "Warning Zone",
+      "Danger Zone": "Danger Zone"
+    };
+    const requestedZone = new URLSearchParams(window.location.search).get("zone");
+    const activeZone = zoneLabels[requestedZone];
+    const status = document.getElementById("zone-status");
+
+    if (activeZone) {
+      document.body.dataset.activeZone = requestedZone;
+      status.textContent = `${activeZone} methods highlighted`;
+      document.querySelectorAll(".zone-card").forEach((card) => {
+        card.classList.toggle("is-active", card.dataset.zone === requestedZone);
+      });
+    }
+  </script>
+</body>
+</html>

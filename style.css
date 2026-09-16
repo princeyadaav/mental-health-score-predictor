@@ -70,6 +70,28 @@ body {
   margin: 0 auto;
 }
 
+.page-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  float: right;
+  color: var(--pine-deep);
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.65);
+  border-radius: var(--radius-sm);
+  padding: 9px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.page-nav:hover {
+  color: var(--coral);
+  border-color: var(--coral);
+  transform: translateY(-1px);
+}
+
 .eyebrow {
   display: inline-block;
   font-family: var(--font-mono);
@@ -509,6 +531,16 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 .reset-btn:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.18); }
 .reset-btn:active { transform: scale(0.98); }
 
+.result-guide-link {
+  color: rgba(234,243,238,0.82);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: 4px;
+}
+
+.result-guide-link:hover { color: #fff; }
+
 /* error state */
 .state-error { padding: 28px 0; }
 .error-icon {
@@ -672,6 +704,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   margin-bottom: 18px;
 }
   .site-header { padding: 44px 16px 24px; }
+  .page-nav { float: none; margin-bottom: 24px; }
   .layout { padding: 0 16px 32px; gap: 16px; }
   .form-panel { padding: 4px 20px 24px; }
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
@@ -684,4 +717,164 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* =========================================================
+   LIFESTYLE METHODS PAGE
+   ========================================================= */
+.lifestyle-page {
+  --life-bg: #050505;
+  --life-surface: #0d0d0d;
+  --life-text: #f4f1ed;
+  --life-muted: #9d9690;
+  --life-line: rgba(255,255,255,0.14);
+  min-height: 100vh;
+  background:
+    radial-gradient(600px 420px at 88% 8%, rgba(148, 10, 10, 0.2), transparent 70%),
+    radial-gradient(520px 420px at 4% 72%, rgba(113, 19, 10, 0.12), transparent 72%),
+    var(--life-bg);
+  color: var(--life-text);
+}
+
+.lifestyle-header,
+.lifestyle-main,
+.lifestyle-footer {
+  max-width: 1160px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.lifestyle-header { padding: 48px 24px 34px; }
+
+.lifestyle-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff6f66;
+  border: 1px solid rgba(255, 93, 86, 0.45);
+  padding: 9px 13px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 0 0 18px rgba(255, 54, 48, 0.08);
+}
+
+.lifestyle-back:hover { background: rgba(255, 53, 47, 0.1); }
+
+.lifestyle-kicker {
+  color: #ff6f66;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  margin: 54px 0 16px;
+  text-transform: uppercase;
+}
+
+.lifestyle-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 5.6rem);
+  font-weight: 500;
+  line-height: 0.98;
+  margin: 0;
+  max-width: 720px;
+}
+
+.lifestyle-header h1 em {
+  color: #ff5149;
+  font-style: italic;
+  text-shadow: 0 0 24px rgba(255, 44, 37, 0.45);
+}
+
+.lifestyle-intro {
+  color: var(--life-muted);
+  font-size: 16px;
+  max-width: 540px;
+  margin: 24px 0 0;
+}
+
+.zone-status {
+  border-left: 2px solid #ff5149;
+  color: #e8deda;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-top: 30px;
+  padding: 7px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lifestyle-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0 24px 54px;
+}
+
+.zone-card {
+  background: var(--life-surface);
+  border: 1px solid var(--life-line);
+  border-radius: 8px;
+  min-height: 430px;
+  padding: 28px 24px 26px;
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.zone-card::before {
+  content: "";
+  height: 3px;
+  inset: 0 0 auto;
+  position: absolute;
+}
+
+.zone-card:hover,
+.zone-card.is-active { transform: translateY(-4px); }
+.zone-balanced::before { background: #54c29b; }
+.zone-warning::before { background: #f59b35; }
+.zone-danger::before { background: #ff4038; }
+.zone-balanced.is-active { border-color: #54c29b; box-shadow: 0 0 30px rgba(84, 194, 155, 0.16); }
+.zone-warning.is-active { border-color: #f59b35; box-shadow: 0 0 30px rgba(245, 155, 53, 0.2); }
+.zone-danger.is-active { border-color: #ff4038; box-shadow: 0 0 34px rgba(255, 50, 43, 0.28); }
+
+.zone-heading { display: flex; align-items: flex-start; gap: 14px; }
+.zone-index {
+  color: #77716d;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding-top: 4px;
+}
+.zone-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+.zone-balanced .zone-label { color: #54c29b; }
+.zone-warning .zone-label { color: #f59b35; }
+.zone-danger .zone-label { color: #ff5149; }
+.zone-card h2 { font-family: var(--font-display); font-size: 25px; font-weight: 500; line-height: 1.08; margin: 0; }
+.zone-summary { color: var(--life-muted); font-size: 13px; margin: 24px 0 22px; min-height: 60px; }
+.method-list { border-top: 1px solid var(--life-line); list-style: none; margin: 0; padding: 8px 0 0; }
+.method-list li { color: #bbb4ae; font-size: 13px; padding: 13px 0; }
+.method-list li + li { border-top: 1px solid rgba(255,255,255,0.08); }
+.method-list strong { color: var(--life-text); display: block; font-weight: 600; margin-bottom: 3px; }
+.zone-danger .method-list strong { color: #ff7068; }
+.lifestyle-footer { color: #6f6863; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; padding: 0 24px 42px; text-align: center; text-transform: uppercase; }
+
+@media (max-width: 820px) {
+  .lifestyle-main { grid-template-columns: 1fr; }
+  .zone-card { min-height: auto; }
+  .zone-summary { min-height: auto; }
+}
+
+@media (max-width: 560px) {
+  .lifestyle-header { padding: 28px 16px 28px; }
+  .lifestyle-kicker { margin-top: 42px; }
+  .lifestyle-main { padding: 0 16px 42px; }
+  .lifestyle-footer { padding-left: 16px; padding-right: 16px; }
 }
