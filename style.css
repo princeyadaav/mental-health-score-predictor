@@ -2,20 +2,21 @@
    TOKENS
    ========================================================= */
 :root {
-  --ink:        #182420;
-  --ink-soft:   #4A5850;
-  --paper:      #EEF2EE;
-  --paper-deep: #E2E8E1;
-  --surface:    #FFFFFF;
-  --line:       #D6DED5;
+  --ink:        #20233A;
+  --ink-soft:   #596078;
+  --paper:      #F5F2FA;
+  --paper-deep: #E9E3F2;
+  --surface:    #FFFDFC;
+  --line:       #DDD9E7;
 
-  --pine:       #21594A;
-  --pine-deep:  #163D33;
-  --pine-tint:  #E4EFE9;
+  --pine:       #237C72;
+  --pine-deep:  #174E58;
+  --pine-tint:  #DDF2ED;
 
-  --amber:      #E3B341;
-  --coral:      #D9534F;
-  --sage:       #4C9A78;
+  --amber:      #F2B84B;
+  --coral:      #E56B65;
+  --sage:       #53A88B;
+  --lilac:      #8874C4;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-body:    'Inter', -apple-system, sans-serif;
@@ -25,8 +26,8 @@
   --radius-md: 14px;
   --radius-lg: 22px;
 
-  --shadow-card: 0 1px 2px rgba(24,36,32,0.04), 0 12px 28px -8px rgba(24,36,32,0.10);
-  --shadow-lift: 0 2px 4px rgba(24,36,32,0.06), 0 20px 40px -12px rgba(22,61,51,0.20);
+  --shadow-card: 0 1px 2px rgba(32,35,58,0.04), 0 12px 28px -8px rgba(91,73,137,0.14);
+  --shadow-lift: 0 2px 4px rgba(32,35,58,0.08), 0 20px 40px -12px rgba(23,78,88,0.28);
 }
 
 * { box-sizing: border-box; }
@@ -36,7 +37,9 @@ html { -webkit-font-smoothing: antialiased; }
 body {
   margin: 0;
   background:
-    radial-gradient(1200px 600px at 85% -10%, #F4F8F3 0%, transparent 55%),
+    radial-gradient(700px 420px at 95% -5%, #FFE5D8 0%, transparent 65%),
+    radial-gradient(800px 500px at -10% 45%, #DDF2ED 0%, transparent 62%),
+    radial-gradient(900px 500px at 75% 100%, #EAE3FA 0%, transparent 60%),
     var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -73,8 +76,8 @@ body {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pine);
-  background: var(--pine-tint);
+  color: #A44C43;
+  background: #FFE0D6;
   padding: 5px 12px;
   border-radius: 100px;
   margin-bottom: 18px;
@@ -93,7 +96,7 @@ body {
 .title em {
   font-style: italic;
   font-weight: 500;
-  color: var(--pine);
+  color: var(--coral);
 }
 
 .subtitle {
@@ -125,13 +128,18 @@ body {
   box-shadow: var(--shadow-card);
 }
 
-.form-panel { padding: 8px 32px 32px; }
+.form-panel {
+  padding: 8px 32px 32px;
+  border-top: 4px solid var(--coral);
+}
 
 .result-panel {
   position: sticky;
   top: 24px;
   min-height: 520px;
-  background: linear-gradient(165deg, var(--pine-deep) 0%, var(--pine) 100%);
+  background:
+    radial-gradient(360px 240px at 100% 0%, rgba(242,184,75,0.34), transparent 65%),
+    linear-gradient(165deg, #174E58 0%, #237C72 58%, #356B89 100%);
   border: none;
   box-shadow: var(--shadow-lift);
   display: flex;
@@ -220,7 +228,7 @@ input:focus, select:focus {
   outline: none;
   border-color: var(--pine);
   background: var(--surface);
-  box-shadow: 0 0 0 3px var(--pine-tint);
+  box-shadow: 0 0 0 3px rgba(35,124,114,0.18);
 }
 
 input:invalid:not(:placeholder-shown):not(:focus) {
@@ -314,7 +322,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   font-weight: 600;
   font-size: 14.5px;
   color: #fff;
-  background: var(--pine);
+  background: linear-gradient(110deg, var(--coral), #D88954);
   border: none;
   border-radius: var(--radius-sm);
   padding: 13px 26px;
@@ -325,7 +333,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   transition: background 0.15s ease, transform 0.1s ease;
   white-space: nowrap;
 }
-.submit-btn:hover { background: var(--pine-deep); }
+.submit-btn:hover { background: linear-gradient(110deg, #D95B5A, #C97846); }
 .submit-btn:active { transform: scale(0.98); }
 .submit-btn:disabled { opacity: 0.75; cursor: progress; }
 
@@ -558,8 +566,8 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 }
 
 .progress-step.active span {
-  background: var(--pine);
-  border-color: var(--pine);
+  background: var(--coral);
+  border-color: var(--coral);
   color: #fff;
 }
 
@@ -570,7 +578,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 }
 
 .progress-step.active + .progress-line {
-  background: var(--pine);
+  background: var(--coral);
 }
 /* Completed progress step */
 
@@ -595,6 +603,11 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 
 .progress-step.completed + .progress-line {
   background: var(--pine);
+}
+
+.progress-step:nth-of-type(3).active span {
+  background: var(--lilac);
+  border-color: var(--lilac);
 }
 
 /* =========================================================
@@ -633,6 +646,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   .submit-btn { justify-content: center; }
   .api-note { text-align: center; }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

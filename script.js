@@ -6,7 +6,6 @@
   const form = document.getElementById("predict-form");
   const submitBtn = document.getElementById("submit-btn");
   const resetBtn = document.getElementById("reset-btn");
-  const errorRetryBtn = document.getElementById("error-retry-btn");
 
   const stateIdle = document.getElementById("state-idle");
   const stateLoading = document.getElementById("state-loading");
@@ -329,7 +328,4 @@ formSections.forEach((section, index) => {
     showState("idle");
   });
 
-  errorRetryBtn.addEventListener("click", () => {
-    showState("idle");
-  });
 })();
