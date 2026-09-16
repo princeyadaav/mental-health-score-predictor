@@ -21,8 +21,27 @@
   const gaugeFill = document.getElementById("gauge-fill");
   const errorCopyEl = document.getElementById("error-copy");
   const resultGuideLink = document.getElementById("result-guide-link");
+  const themeToggle = document.getElementById("theme-toggle");
 
   const GAUGE_ARC_LENGTH = 314; // approx pi * r(100)
+
+  // ---------------------------------------------------------
+  // Theme preference
+  // ---------------------------------------------------------
+  function setTheme(isDark) {
+    document.body.classList.toggle("dark-mode", isDark);
+    themeToggle.setAttribute("aria-label", isDark ? "Switch to Light Mode" : "Switch to Dark Mode");
+    themeToggle.setAttribute("title", isDark ? "Switch to Light Mode" : "Switch to Dark Mode");
+  }
+
+  const savedTheme = localStorage.getItem("mental-health-theme");
+  setTheme(savedTheme === "dark");
+
+  themeToggle.addEventListener("click", () => {
+    const isDark = !document.body.classList.contains("dark-mode");
+    setTheme(isDark);
+    localStorage.setItem("mental-health-theme", isDark ? "dark" : "light");
+  });
 
   // ---------------------------------------------------------
   // Draw tick marks on both gauges (0..10, every 2 units)
