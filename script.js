@@ -15,8 +15,10 @@
   const scoreNumberEl = document.getElementById("score-number");
   const scoreBandEl = document.getElementById("score-band");
   const scoreContextEl = document.getElementById("score-context");
+  const riskScoreEl = document.getElementById("risk-score");
+  const confidenceScoreEl = document.getElementById("confidence-score");
+  const scoreReasonsEl = document.getElementById("score-reasons");
   const gaugeFill = document.getElementById("gauge-fill");
-  const errorLabelEl = document.getElementById("error-label");
   const errorCopyEl = document.getElementById("error-copy");
 
   const GAUGE_ARC_LENGTH = 314; // approx pi * r(100)
@@ -189,29 +191,40 @@ formSections.forEach((section, index) => {
   function bandFor(score) {
     if (score < 4) {
       return {
-        label: "Signal: strained",
+        label: "Danger Zone",
         context: "Your responses suggest elevated strain right now. Small shifts in sleep or screen time can go a long way.",
       };
     }
     if (score < 7) {
       return {
-        label: "Signal: balanced",
+        label: "Warning Zone",
         context: "Your rhythm looks fairly steady, with some room to recover and reset.",
       };
     }
     return {
-      label: "Signal: strong",
+      label: "Balanced/Healthy",
       context: "Your habits point to a well-supported, resilient baseline. Keep it up.",
     };
   }
 
-  function renderResult(score) {
+  function renderResult(score, details = {}) {
     const clamped = Math.max(0, Math.min(10, score));
-    const { label, context } = bandFor(clamped);
+    const fallback = bandFor(clamped);
+    const label = details.prediction || fallback.label;
+    const context = details.recommendation || fallback.context;
 
     scoreNumberEl.textContent = score.toFixed(2);
     scoreBandEl.textContent = label;
     scoreContextEl.textContent = context;
+    riskScoreEl.textContent = `Risk ${Number.isFinite(details.risk_score) ? details.risk_score : "—"}/100`;
+    confidenceScoreEl.textContent = `Confidence ${Number.isFinite(details.confidence) ? Math.round(details.confidence * 100) : "—"}%`;
+    scoreReasonsEl.replaceChildren(
+      ...(Array.isArray(details.reasons) ? details.reasons : []).map((reason) => {
+        const item = document.createElement("li");
+        item.textContent = reason;
+        return item;
+      })
+    );
 
     // reset then animate the arc fill on next frame
     gaugeFill.style.transition = "none";
@@ -231,8 +244,7 @@ formSections.forEach((section, index) => {
   }
 
   function renderError(label, copy) {
-    errorLabelEl.textContent = label;
-    errorCopyEl.textContent = copy;
+    errorCopyEl.textContent = `${label}: ${copy}`;
     showState("error");
   }
 
@@ -307,7 +319,7 @@ formSections.forEach((section, index) => {
         return;
       }
 
-      renderResult(data.predicted_mental_health_score);
+      renderResult(data.predicted_mental_health_score, data);
     } catch (err) {
       renderError(
         "Can't reach the server",

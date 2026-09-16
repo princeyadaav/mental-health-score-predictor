@@ -150,9 +150,19 @@ POST /predict
 
 ```json
 {
-    "predicted_mental_health_score": 72.84
+    "predicted_mental_health_score": 6.42,
+    "prediction": "Warning Zone",
+    "risk_score": 49,
+    "confidence": 0.7,
+    "reasons": [
+        "Sleep duration is between 6 and 7 hours",
+        "Screen time is above the dataset's upper quartile"
+    ],
+    "recommendation": "Some risk factors are elevated. Focus on steadier sleep, manageable screen time, and regular recovery."
 }
 ```
+
+The original `predicted_mental_health_score` field remains available for frontend compatibility. The risk layer combines that model score with dataset-calibrated sleep, stress, screen-time, unlock, study, activity, and lifestyle interaction rules. The existing model is a continuous `RandomForestRegressor`, so classification probabilities are not available; `confidence` is estimated from prediction spread across the forest trees.
 
 ---
 
