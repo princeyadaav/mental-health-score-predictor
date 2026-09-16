@@ -12,6 +12,8 @@
   --input-hover:#B9C6B7;
   --hint:       #90A096;
   --field-error:#FBEEEE;
+  --submit-start:#E56B65;
+  --submit-end:  #D88954;
 
   --pine:       #237C72;
   --pine-deep:  #174E58;
@@ -49,6 +51,8 @@ body.dark-mode {
   --pine-deep:  #A9D8CB;
   --pine-tint:  #29473A;
   --coral:      #F08A82;
+  --submit-start:#B94F59;
+  --submit-end:  #8B4E64;
   --shadow-card: 0 1px 2px rgba(0,0,0,0.18), 0 12px 28px -8px rgba(0,0,0,0.28);
   --shadow-lift: 0 2px 4px rgba(0,0,0,0.2), 0 20px 40px -12px rgba(0,0,0,0.38);
 }
@@ -158,7 +162,11 @@ body.dark-mode .theme-toggle-thumb { transform: translateX(14px); }
   font-weight: 700;
   text-decoration: none;
   margin-right: 142px;
-  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+}
+
+body.dark-mode .page-nav {
+  background: rgba(29, 43, 36, 0.88);
 }
 
 .page-nav:hover {
@@ -420,7 +428,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   font-weight: 600;
   font-size: 14.5px;
   color: #fff;
-  background: linear-gradient(110deg, var(--coral), #D88954);
+  background: linear-gradient(110deg, var(--submit-start), var(--submit-end));
   border: none;
   border-radius: var(--radius-sm);
   padding: 13px 26px;
@@ -428,10 +436,10 @@ input:invalid:not(:placeholder-shown):not(:focus) {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition: background 0.25s ease, transform 0.1s ease;
   white-space: nowrap;
 }
-.submit-btn:hover { background: linear-gradient(110deg, #D95B5A, #C97846); }
+.submit-btn:hover { background: linear-gradient(110deg, var(--coral), var(--submit-end)); }
 .submit-btn:active { transform: scale(0.98); }
 .submit-btn:disabled { opacity: 0.75; cursor: progress; }
 
@@ -799,17 +807,29 @@ input:invalid:not(:placeholder-shown):not(:focus) {
    LIFESTYLE METHODS PAGE
    ========================================================= */
 .lifestyle-page {
+  --life-bg: #F5F2FA;
+  --life-surface: #FFFDFC;
+  --life-text: #20233A;
+  --life-muted: #596078;
+  --life-line: rgba(32,35,58,0.14);
+  min-height: 100vh;
+  background:
+    radial-gradient(600px 420px at 88% 8%, rgba(255, 196, 170, 0.34), transparent 70%),
+    radial-gradient(520px 420px at 4% 72%, rgba(221, 242, 237, 0.62), transparent 72%),
+    var(--life-bg);
+  color: var(--life-text);
+}
+
+.lifestyle-page.dark-mode {
   --life-bg: #050505;
   --life-surface: #0d0d0d;
   --life-text: #f4f1ed;
   --life-muted: #9d9690;
   --life-line: rgba(255,255,255,0.14);
-  min-height: 100vh;
   background:
     radial-gradient(600px 420px at 88% 8%, rgba(148, 10, 10, 0.2), transparent 70%),
     radial-gradient(520px 420px at 4% 72%, rgba(113, 19, 10, 0.12), transparent 72%),
     var(--life-bg);
-  color: var(--life-text);
 }
 
 .lifestyle-header,
@@ -822,6 +842,14 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 }
 
 .lifestyle-header { padding: 48px 24px 34px; }
+
+.lifestyle-page .theme-toggle {
+  top: 48px;
+  right: 24px;
+  border-color: var(--life-line);
+  background: var(--life-surface);
+  color: var(--life-text);
+}
 
 .lifestyle-back {
   display: inline-flex;
@@ -950,6 +978,7 @@ input:invalid:not(:placeholder-shown):not(:focus) {
 
 @media (max-width: 560px) {
   .lifestyle-header { padding: 28px 16px 28px; }
+  .lifestyle-page .theme-toggle { top: 28px; right: 16px; }
   .lifestyle-kicker { margin-top: 42px; }
   .lifestyle-main { padding: 0 16px 42px; }
   .lifestyle-footer { padding-left: 16px; padding-right: 16px; }

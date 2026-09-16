@@ -14,6 +14,12 @@
 
   <header class="lifestyle-header">
     <a class="lifestyle-back" href="index.html"><span aria-hidden="true">←</span> Back to signal</a>
+    <!-- Theme toggle -->
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to Light Mode" title="Switch to Light Mode">
+      <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">☀️</span>
+      <span class="theme-toggle-track" aria-hidden="true"><span class="theme-toggle-thumb"></span></span>
+      <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">🌙</span>
+    </button>
     <p class="lifestyle-kicker">Daily rhythm / practical methods</p>
     <h1>Build a healthier <em>baseline</em>.</h1>
     <p class="lifestyle-intro">Small, repeatable choices can move your sleep, stress, movement, and screen habits in a steadier direction.</p>
@@ -76,6 +82,23 @@
   <footer class="lifestyle-footer">Informational guidance only. A score is not a diagnosis.</footer>
 
   <script>
+    // Keep the lifestyle page theme in sync with the homepage.
+    const themeToggle = document.getElementById("theme-toggle");
+    const savedTheme = localStorage.getItem("mental-health-theme");
+
+    function setTheme(isDark) {
+      document.body.classList.toggle("dark-mode", isDark);
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to Light Mode" : "Switch to Dark Mode");
+      themeToggle.setAttribute("title", isDark ? "Switch to Light Mode" : "Switch to Dark Mode");
+    }
+
+    setTheme(savedTheme === "dark");
+    themeToggle.addEventListener("click", () => {
+      const isDark = !document.body.classList.contains("dark-mode");
+      setTheme(isDark);
+      localStorage.setItem("mental-health-theme", isDark ? "dark" : "light");
+    });
+
     const zoneLabels = {
       "Balanced/Healthy": "Balanced / Healthy",
       "Warning Zone": "Warning Zone",
