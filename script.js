@@ -20,7 +20,6 @@
   const scoreReasonsEl = document.getElementById("score-reasons");
   const gaugeFill = document.getElementById("gauge-fill");
   const errorCopyEl = document.getElementById("error-copy");
-  const resultGuideLink = document.getElementById("result-guide-link");
   const themeToggle = document.getElementById("theme-toggle");
   const downloadResultBtn = document.getElementById("download-result-btn");
   const shareResultBtn = document.getElementById("share-result-btn");
@@ -274,7 +273,6 @@ formSections.forEach((section, index) => {
     scoreNumberEl.textContent = score.toFixed(2);
     scoreBandEl.textContent = label;
     scoreContextEl.textContent = context;
-    resultGuideLink.href = `lifestyle.html?zone=${encodeURIComponent(label)}`;
     riskScoreEl.textContent = `Risk ${Number.isFinite(details.risk_score) ? details.risk_score : "—"}/100`;
     confidenceScoreEl.textContent = `Confidence ${Number.isFinite(details.confidence) ? Math.round(details.confidence * 100) : "—"}%`;
     scoreReasonsEl.replaceChildren(
